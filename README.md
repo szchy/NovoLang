@@ -1,7 +1,7 @@
 # NovoLang (New Multilingual Programming Language)
 
 <div align="center">
-  <h1>NovoLang</h1>
+  <img src="http://111.230.60.42/chy/NL/NL.png" alt="Logo" width="1000">
   <p>
     <b>Programming without Language Barriers.</b>
   </p>
