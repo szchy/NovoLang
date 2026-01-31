@@ -97,3 +97,8 @@ function main() {
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+#### NovoLang-一个中英文结合的语言，由Python+C++组合开发
+#### NovoLang - a language combining Chinese and English, developed using a combination of Python and C++
+
+##### MADE IN CHINA
