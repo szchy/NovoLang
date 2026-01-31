@@ -1,7 +1,6 @@
 # NovoLang (New Multilingual Programming Language)
 
 <div align="center">
-  <img src="https://via.placeholder.com/150?text=NovoLang" alt="NovoLang Logo" width="120" height="120">
   <h1>NovoLang</h1>
   <p>
     <b>Programming without Language Barriers.</b>
@@ -98,8 +97,9 @@ function main() {
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 📄 remark
 
-NovoLang-一个中英文结合的语言，由Python+C++组合开发
-NovoLang - a language combining Chinese and English, developed using a combination of Python and C++
-MADE IN CHINA
+##### NovoLang-一个中英文结合的语言，由Python+C++组合开发
+##### NovoLang - a language combining Chinese and English, developed using a combination of Python and C++
+##### MADE IN CHINA
 
