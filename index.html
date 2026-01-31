@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovoLang - 新一代多语言编程语言</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e293b;
+            --accent-color: #f59e0b;
+            --text-color: #334155;
+            --bg-color: #ffffff;
+            --light-bg: #f8fafc;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: #eff6ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Code Demo */
+        .code-demo {
+            background-color: var(--light-bg);
+            padding: 5rem 2rem;
+        }
+
+        .code-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--code-bg);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .code-header {
+            background-color: #2d2d2d;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .code-content {
+            padding: 2rem;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            color: var(--code-text);
+            overflow-x: auto;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .function { color: #dcdcaa; }
+        .comment { color: #6a9955; }
+        .number { color: #b5cea8; }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#" class="logo">🚀 NovoLang</a>
+            <div class="nav-links">
+                <a href="#features">特性</a>
+                <a href="#demo">示例</a>
+                <a href="#docs">文档</a>
+                <a href="#community">社区</a>
+            </div>
+            <div>
+                <a href="#" class="btn btn-primary">立即下载 v1.0</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>让编程不再有语言障碍</h1>
+        <p>NovoLang 是一款支持中、英、日、韩、俄五种语言关键词的现代化编程语言。内置自动化功能，语法简洁，专为全球开发者设计。</p>
+        <div class="hero-btns">
+            <a href="#" class="btn btn-primary">开始使用</a>
+            <a href="https://github.com/NovoLang" class="btn btn-outline">查看源码</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="section-title">
+            <h2>为什么选择 NovoLang？</h2>
+            <p>打破语言壁垒，回归编程本质</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🌏</div>
+                <h3>多语言原生支持</h3>
+                <p>无论你习惯使用中文、英语还是其他语言，NovoLang 都能理解。同一套逻辑，多种表达方式。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>内置自动化</h3>
+                <p>原生支持点击、截图、输入等自动化操作。编写脚本从未如此简单，一行代码搞定繁琐任务。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>极速上手</h3>
+                <p>基于 Python 生态，语法接近自然语言。配套轻量级 IDE，智能提示，一键运行。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛠️</div>
+                <h3>强大的工具链</h3>
+                <p>内置包管理器、调试器和格式化工具。从编写到打包，提供完整的开发体验。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="code-demo">
+        <div class="section-title">
+            <h2>代码示例</h2>
+            <p>看看用 NovoLang 编写代码是多么自然</p>
+        </div>
+        <div class="code-container">
+            <div class="code-header">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="code-content">
+                <pre><code><span class="comment"># 这是一个 NovoLang 自动化脚本示例</span>
+
+<span class="keyword">function</span> <span class="function">main</span>() {
+    <span class="function">print</span>(<span class="string">"开始执行自动化任务..."</span>)
+
+    <span class="comment"># 打开应用</span>
+    <span class="keyword">run</span>(<span class="string">"notepad.exe"</span>)
+    <span class="keyword">wait</span>(<span class="number">2</span>)
+
+    <span class="comment"># 模拟输入</span>
+    <span class="function">type</span>(<span class="string">"Hello, NovoLang!"</span>)
+    
+    <span class="comment"># 截图保存</span>
+    <span class="function">screenshot</span>(<span class="string">"demo.png"</span>)
+    
+    <span class="function">print</span>(<span class="string">"任务完成！"</span>)
+}
+
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span> {
+    <span class="function">main</span>()
+}</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>NovoLang</h4>
+                <p>打破边界，连接世界。<br>新一代多语言编程平台。</p>
+            </div>
+            <div class="footer-col">
+                <h4>资源</h4>
+                <ul>
+                    <li><a href="#">下载 IDE</a></li>
+                    <li><a href="#">官方文档</a></li>
+                    <li><a href="#">API 参考</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>社区</h4>
+                <ul>
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">论坛</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关于</h4>
+                <ul>
+                    <li><a href="#">团队</a></li>
+                    <li><a href="#">博客</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 NovoLang Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
